@@ -1,0 +1,144 @@
+\documentclass[11pt]{article}
+
+% --- Packages ---
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=3.5cm]{geometry}
+\usepackage[main=english,ngerman]{babel}
+\usepackage{amsmath}
+% \usepackage{nccmath}
+\usepackage{amssymb}
+\usepackage{float}
+% \usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{booktabs}
+% \usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathtools}
+\usepackage{lipsum}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{bold-extra}
+\usepackage{multirow}
+\usepackage[normalem]{ulem} % Added normalem to prevent ulem from changing \emph to underline
+\usepackage{subcaption}
+\usepackage{xcolor} % Required for listing colors
+\usepackage{hyperref}
+
+% --- Custom Commands ---
+\newcommand{\bbN}{\mathbbm{N}}
+\newcommand{\bbZ}{\mathbbm{Z}}
+\newcommand{\bbQ}{\mathbbm{Q}}
+\newcommand{\bbR}{\mathbbm{R}}
+\newcommand{\bbC}{\mathbbm{C}}
+\newcommand{\bbI}{\mathbbm{I}}
+\newcommand{\bigO}{\mathcal{O}}
+\newtheorem{lemma}{Lemma}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand\abv[2]{\stackrel{\mathclap{\normalfont\mbox{\tiny{#2}}}}{#1}}
+
+% --- Layout & Header ---
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+\setlength{\headheight}{42.9pt}
+\lhead{Foundation in\\Artificial Intelligence \\ WiSe 25/26}
+\chead{\huge\textbf{Assignment 05}} % Updated to Assignment 05 per source
+\rhead{Trang Hua: 3259405\\ Finn Österreicher: 3777877\\ Sareer Ahmed: 3801934}
+
+% --- Listings Style Fixed ---
+\definecolor{pgrey}{rgb}{0.5,0.5,0.5}
+\lstdefinestyle{java}{
+  language=Java,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  numbers=left,
+  stepnumber=1,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{gray},
+  keywordstyle=\color{black}\bfseries,
+  stringstyle=\color{gray}\itshape,
+  basicstyle=\scriptsize\ttfamily\linespread{0.5},
+  moredelim=[il][\color{pgrey}]{\$\$},
+  moredelim=[is][\color{pgrey}]{\%\%}{\%\%},
+  keywordsprefix={@},
+  frame=single, 
+  numberstyle=\tiny
+}
+
+% Subfigure numbering
+\renewcommand\thesubfigure{\arabic{subfigure}}
+\captionsetup[subfigure]{labelformat=parens,labelsep=space}
+
+\begin{document}
+
+\section*{1 Probabilistic Reasoning}
+\subsection*{1.1 From Logical to Probabilistic Reasoning}
+
+We define the binary random variables as follows:
+\begin{itemize}
+    \item $A$ (Frost): Frost occurs.
+    \item $B$ (Slippery Road): The road is slippery.
+    \item $C$ (Accident): An accident happens.
+\end{itemize}
+
+\subsection*{a. English-language Interpretations}
+Interpretations of the probabilistic statements:
+
+\begin{enumerate}
+    \item[\textbf{a)}] $P(b|\neg a) \le P(b)$: The probability of the road being slippery given that no frost occurs is less than or equal to the prior probability of the road being slippery.
+    \item[\textbf{b)}] $P(c|b) \ge P(c)$: The probability of an accident occurring given a slippery road is greater than or equal to the prior probability of an accident.
+    \item[\textbf{c)}] $P(a|b) \ge P(a)$: Given that the road is slippery, the probability that frost occurred is greater than or equal to the prior probability of frost.
+    \item[\textbf{d)}] $P(\neg a|\neg b) \ge P(\neg a)$: Given that the road is not slippery, the probability that no frost occurred is greater than or equal to the prior probability of no frost.
+\end{enumerate}
+
+\subsection*{b. Generalization of Logical Implication}
+Assume logical implication $(a \Rightarrow b)$ is represented as $P(b|a) = 1$.
+
+\subsubsection*{a) Show $P(b|\neg a) \le P(b)$}
+Using the Law of Total Probability for $P(b)$:
+\[ P(b) = P(b|a)P(a) + P(b|\neg a)P(\neg a) \]
+Substitute $P(b|a) = 1$ and $P(\neg a) = 1 - P(a)$:
+\[ P(b) = 1 \cdot P(a) + P(b|\neg a)(1 - P(a)) \]
+\[ P(b) = P(a) + P(b|\neg a) - P(b|\neg a)P(a) \]
+To show $P(b|\neg a) \le P(b)$, we evaluate the difference:
+\[ P(b) - P(b|\neg a) = P(a) - P(b|\neg a)P(a) = P(a)(1 - P(b|\neg a)) \]
+Since $P(a) \ge 0$ and $(1 - P(b|\neg a)) \ge 0$, the difference is non-negative, meaning $P(b) \ge P(b|\neg a)$.
+
+\subsubsection*{b) Show $P(a|b) \ge P(a)$}
+Using Bayes' Theorem:
+\[ P(a|b) = \frac{P(b|a)P(a)}{P(b)} \]
+Substitute $P(b|a) = 1$:
+\[ P(a|b) = \frac{P(a)}{P(b)} \]
+Since $P(b) \le 1$, it follows that $\frac{P(a)}{P(b)} \ge P(a)$, thus $P(a|b) \ge P(a)$.
+
+\subsubsection*{c) Show $P(\neg a|\neg b) = 1$}
+By Bayes' Theorem:
+\[ P(\neg a|\neg b) = \frac{P(\neg b|\neg a)P(\neg a)}{P(\neg b)} \]
+From the Law of Total Probability, since $P(b|a)=1$, then $P(\neg b|a)=0$:
+\[ P(\neg b) = 0 \cdot P(a) + P(\neg b|\neg a)P(\neg a) = P(\neg b|\neg a)P(\neg a) \]
+Substituting this into the numerator:
+\[ P(\neg a|\neg b) = \frac{P(\neg b|\neg a)P(\neg a)}{P(\neg b|\neg a)P(\neg a)} = 1 \]
+
+\subsection*{c. Bayesian Network Computations}
+Given: $P(a)=0.6, P(b|a)=0.7, P(b|\neg a)=0.5, P(c|b)=0.6, P(c|\neg b)=0.3$.
+
+\subsubsection*{a) $P(b)$}
+Using marginalization:
+\[ P(b) = P(b|a)P(a) + P(b|\neg a)P(\neg a) = (0.7 \cdot 0.6) + (0.5 \cdot 0.4) = \mathbf{0.62} \]
+
+\subsubsection*{b) $P(c)$}
+Using marginalization:
+\[ P(c) = P(c|b)P(b) + P(c|\neg b)P(\neg b) = (0.6 \cdot 0.62) + (0.3 \cdot 0.38) = \mathbf{0.486} \]
+
+\subsubsection*{c) $P(a|c)$}
+Using Bayes' Theorem:
+\[ P(a|c) = \frac{P(c|a)P(a)}{P(c)} \]
+Where $P(c|a) = P(c|b)P(b|a) + P(c|\neg b)P(\neg b|a) = (0.6 \cdot 0.7) + (0.3 \cdot 0.3) = 0.51$.
+\[ P(a|c) = \frac{0.51 \cdot 0.6}{0.486} = \frac{0.306}{0.486} \approx \mathbf{0.6296} \]
+
+\end{document}

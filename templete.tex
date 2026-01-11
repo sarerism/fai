@@ -1,0 +1,82 @@
+\documentclass[11pt]{article}
+
+% Nicht alle Packages sind notwendig, gerade für DSA nicht, aber in anderen Modulen vielleicht.
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=3.5cm]{geometry}
+\usepackage[main=english,ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{nccmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{bbm}
+\usepackage[pdftex]{graphicx}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{mathtools}
+\usepackage{lipsum}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{bold-extra}
+\usepackage{multirow}
+\usepackage{ulem}  
+\usepackage{subcaption}
+\usepackage{hyperref}
+
+\newcommand{\bbN}{\mathbbm{N}}
+\newcommand{\bbZ}{\mathbbm{Z}}
+\newcommand{\bbQ}{\mathbbm{Q}}
+\newcommand{\bbR}{\mathbbm{R}}
+\newcommand{\bbC}{\mathbbm{C}}
+\newcommand{\bbI}{\mathbbm{I}}
+
+\newcommand{\bigO}{\mathcal{O}}
+\newtheorem{lemma}{Lemma}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand\abv[2]{\stackrel{\mathclap{\normalfont\mbox\tiny{#2}}}{#1}}
+
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+
+\setlength{\parindent}{0 pt}
+
+\pagestyle{fancy}
+\setlength{\headheight}{42.91258pt}
+\lhead{Foundation in\\Artificial Intelligence \\
+WiSe 25/26}
+
+\chead{\huge\textbf{Homework 03}}
+\rhead{Trang Hua: 3259405\\
+Finn Österreicher: 3777877\\
+Sareer Ahmed: 3801934}
+
+\lstdefinestyle{java}{language=Java,
+
+\lstdefinestyle{java}{language=Java,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  numbers=left,
+  stepnumber=1,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{gray},
+  keywordstyle=\color{black}\bfseries,
+  stringstyle=\color{gray}\itshape,
+  %basicstyle=\scriptsize \fontfamily{}\selectfont \linespread{0.5},
+  basicstyle=\scriptsize \ttfamily \linespread{0.5},
+  moredelim=[il][\textcolor{pgrey}]{\$\$},
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%},
+  keywordsprefix={@},
+  frame = single, 
+  numberstyle=\tiny
+}
+
+% Nummerierung der Subfigures von Buchstaben auf arabische Ziffern umstellen
+\renewcommand\thesubfigure{\arabic{subfigure}}
+\captionsetup[subfigure]{labelformat=parens,labelsep=space}
+
+

@@ -4,8 +4,6 @@ This repository contains the homework assignments and solutions for the **Founda
 
 ## Authors
 
-*   **Trang Hua** (Matriculation No.: 3259405)
-*   **Finn Österreicher** (Matriculation No.: 3777877)
 *   **Sareer Ahmed** (Matriculation No.: 3801934)
 
 ## Repository Structure
